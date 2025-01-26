@@ -1,1 +1,1 @@
-# empty-template
+# Auth0 React sample
