@@ -40,6 +40,7 @@ createRoot(document.getElementById("root")).render(
     <Auth0Provider
         domain="dev-p78arxi4c75zw3df.eu.auth0.com"
         clientId="RNcjpTpFWUXk3oVHo9r4vFjwJNRgy0U8"
+        cacheLocation="localstorage"
         authorizationParams={{
             redirect_uri: window.location.origin,
             audience: "https://reqres.in/",
