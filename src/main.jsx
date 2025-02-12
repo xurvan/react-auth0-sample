@@ -15,6 +15,17 @@ function Profile() {
     return <div>Hello {user.name}</div>;
 }
 
+function LogTokenButton() {
+    const {getAccessTokenSilently} = useAuth0();
+
+    const handleClick = async () => {
+        const token = await getAccessTokenSilently();
+        console.log(token);
+    }
+
+    return <button onClick={handleClick}>Send</button>;
+}
+
 function App() {
     const {isAuthenticated, isLoading, error} = useAuth0();
 
@@ -32,6 +43,7 @@ function App() {
     return (
         <>
             <Profile/>
+            <LogTokenButton/>
         </>
     );
 }
