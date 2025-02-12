@@ -2,21 +2,21 @@ import {createRoot} from "react-dom/client";
 import {Auth0Provider, useAuth0} from "@auth0/auth0-react";
 
 function LoginButton() {
-    const {isAuthenticated, loginWithRedirect} = useAuth0();
+    const {loginWithRedirect} = useAuth0();
 
     return (
-        !isAuthenticated && <button onClick={loginWithRedirect}>Log in</button>
+        <button onClick={loginWithRedirect}>Log in</button>
     );
 }
 
 function Profile() {
-    const {user, isAuthenticated} = useAuth0();
+    const {user} = useAuth0();
 
-    return isAuthenticated && <div>Hello {user.name}</div>;
+    return <div>Hello {user.name}</div>;
 }
 
 function App() {
-    const {isLoading, error} = useAuth0();
+    const {isAuthenticated, isLoading, error} = useAuth0();
 
     // Wait for the SDK to initialize and handle any errors
     if (isLoading) {
@@ -25,11 +25,13 @@ function App() {
     if (error) {
         return <div>Oops... {error.message}</div>;
     }
+    if (!isAuthenticated) {
+        return <LoginButton/>
+    }
 
     return (
         <>
             <Profile/>
-            <LoginButton/>
         </>
     );
 }
